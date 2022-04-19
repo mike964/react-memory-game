@@ -30,6 +30,7 @@ function App() {
 	const [matchedCardsCount, setMatchedCardsCount] = useState(0)
 	// Timer : calculate time passed for match
 	const [seconds, setSeconds] = useState(0)
+	const [firstClick, setFirstClick] = useState(true)
 
 	// shuffle cards for new game
 	const shuffleCards = () => {
@@ -43,9 +44,13 @@ function App() {
 		setTurns(0)
 	}
 
-	// handle a choice
+	// handle when single card get clicked
 	const handleChoice = card => {
+		// If first time user click card, start timer
+		if (firstClick) startTimer()
+		setFirstClick(false)
 		console.log(card)
+
 		choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
 	}
 
@@ -72,6 +77,7 @@ function App() {
 		}
 	}, [choiceOne, choiceTwo])
 
+	// Match Ends
 	useEffect(() => {
 		if (cards.length > 0 && matchedCardsCount === cards.length / 2) {
 			// Show end game modal
@@ -88,12 +94,18 @@ function App() {
 		setDisabled(false)
 	}
 
-	// start new game automatically
-	// useEffect(() => {
-	// 	shuffleCards()
-	// }, [])
+	// start new game automatically when app mounts
+	useEffect(() => {
+		shuffleCards()
+	}, [])
+
 	const startNewGame = () => {
 		shuffleCards()
+		// Reset State
+		setMatchedCardsCount(0)
+		// Reset timer - clear old timer interval
+		setSeconds(0)
+		setShowModal(false)
 		startTimer()
 	}
 
