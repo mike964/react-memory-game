@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './Modal.css'
 
 // Match end modal
-const Modal = ({ showModal, handleClose }) => {
+const Modal = ({ showModal, handleClose, turns, seconds }) => {
 	// const [showModal, setShowModal] = useState(false);
 
 	return (
@@ -15,7 +15,10 @@ const Modal = ({ showModal, handleClose }) => {
 				<span className='close' onClick={handleClose}>
 					×
 				</span>
-				<p>Well Done!</p>
+				<h3>Well Done!</h3>
+				<p>
+					You have finished with {turns} turns in {seconds} seconds
+				</p>
 			</div>
 		</div>
 	)

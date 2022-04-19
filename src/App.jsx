@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import Board from './components/Board'
 import Modal from './components/Modal'
@@ -14,6 +14,10 @@ const cardImages = [
 ]
 
 function App() {
+	console.log('App.jsx mounted.')
+	const timerId = useRef()
+	// const seconds = useRef(0)  // Not work!
+
 	const [cards, setCards] = useState([])
 	console.log(cards.length)
 	const [turns, setTurns] = useState(0)
@@ -24,6 +28,8 @@ function App() {
 	const [showModal, setShowModal] = useState(false)
 	// Matched cards count : correct flipped cards
 	const [matchedCardsCount, setMatchedCardsCount] = useState(0)
+	// Timer : calculate time passed for match
+	const [seconds, setSeconds] = useState(0)
 
 	// shuffle cards for new game
 	const shuffleCards = () => {
@@ -70,6 +76,7 @@ function App() {
 		if (cards.length > 0 && matchedCardsCount === cards.length / 2) {
 			// Show end game modal
 			setShowModal(true)
+			stopTimer()
 		}
 	}, [matchedCardsCount, cards])
 
@@ -81,23 +88,45 @@ function App() {
 		setDisabled(false)
 	}
 
-	// start new game automagically
-	useEffect(() => {
+	// start new game automatically
+	// useEffect(() => {
+	// 	shuffleCards()
+	// }, [])
+	const startNewGame = () => {
 		shuffleCards()
-	}, [])
+		startTimer()
+	}
+
+	const startTimer = () => {
+		timerId.current = setInterval(() => {
+			// renders.current++
+			setSeconds(prev => prev + 1)
+		}, 1000)
+		console.log(timerId.current)
+	}
+
+	const stopTimer = () => {
+		clearInterval(timerId.current)
+		timerId.current = 0
+	}
 
 	return (
 		<div className='App'>
 			<h1>Magic Match</h1>
-			<button onClick={shuffleCards}>New Game</button>
-			<button onClick={() => setShowModal(!showModal)}>
-				Show End Game Modal
-			</button>
+			<section style={{ display: 'flex', justifyContent: 'center' }}>
+				<button onClick={startNewGame}>New Game</button>{' '}
+				<button onClick={() => setShowModal(!showModal)}>Show End Modal</button>{' '}
+				<div style={{ width: '200px' }}>timer: {seconds}</div>
+			</section>
 
-			<Modal
-				showModal={showModal}
-				handleClose={() => setShowModal(!showModal)}
-			/>
+			{showModal && (
+				<Modal
+					showModal={showModal}
+					handleClose={() => setShowModal(!showModal)}
+					turns={turns}
+					seconds={seconds}
+				/>
+			)}
 
 			<Board
 				cards={cards}
