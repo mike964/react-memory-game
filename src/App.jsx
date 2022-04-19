@@ -112,31 +112,35 @@ function App() {
 
 	return (
 		<div className='App'>
-			<h1>Magic Match</h1>
-			<section style={{ display: 'flex', justifyContent: 'center' }}>
+			<header>
+				<h3>Magic Match</h3>
+
+				<div className='timer'>Timer: {seconds}</div>
+			</header>
+			<div className='btns'>
 				<button onClick={startNewGame}>New Game</button>{' '}
-				<button onClick={() => setShowModal(!showModal)}>Show End Modal</button>{' '}
-				<div style={{ width: '200px' }}>timer: {seconds}</div>
-			</section>
+				<button onClick={() => setShowModal(!showModal)}>Show Modal</button>{' '}
+			</div>
+			<div className='container'>
+				{showModal && (
+					<Modal
+						showModal={showModal}
+						handleClose={() => setShowModal(!showModal)}
+						turns={turns}
+						seconds={seconds}
+					/>
+				)}
 
-			{showModal && (
-				<Modal
-					showModal={showModal}
-					handleClose={() => setShowModal(!showModal)}
-					turns={turns}
-					seconds={seconds}
+				<Board
+					cards={cards}
+					choiceOne={choiceOne}
+					choiceTwo={choiceTwo}
+					handleChoice={handleChoice}
+					disabled={disabled}
 				/>
-			)}
 
-			<Board
-				cards={cards}
-				choiceOne={choiceOne}
-				choiceTwo={choiceTwo}
-				handleChoice={handleChoice}
-				disabled={disabled}
-			/>
-
-			<p>Turns: {turns}</p>
+				<p>Turns: {turns}</p>
+			</div>
 		</div>
 	)
 }
