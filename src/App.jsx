@@ -125,14 +125,20 @@ function App() {
 	return (
 		<div className='App'>
 			<header>
-				<h3>Magic Match</h3>
-
-				<div className='timer'>Timer: {seconds}</div>
+				<h3>
+					{' '}
+					<i className='fa-solid fa-chess-board'></i> Magic Match
+				</h3>
+				<div className='btns'>
+					<button onClick={startNewGame}>New Game</button>{' '}
+					{/* <button onClick={() => setShowModal(!showModal)}>Show Modal</button>{' '} */}
+				</div>
+				<div className='timer'>
+					<i className='fa-regular fa-clock'></i> Timer:{' '}
+					{seconds === 0 ? '0:00' : seconds}
+				</div>
 			</header>
-			<div className='btns'>
-				<button onClick={startNewGame}>New Game</button>{' '}
-				<button onClick={() => setShowModal(!showModal)}>Show Modal</button>{' '}
-			</div>
+
 			<div className='container'>
 				{showModal && (
 					<Modal
@@ -140,6 +146,7 @@ function App() {
 						handleClose={() => setShowModal(!showModal)}
 						turns={turns}
 						seconds={seconds}
+						playAgain={startNewGame}
 					/>
 				)}
 
@@ -151,7 +158,7 @@ function App() {
 					disabled={disabled}
 				/>
 
-				<p>Turns: {turns}</p>
+				{/* <p>Turns: {turns}</p> */}
 			</div>
 		</div>
 	)

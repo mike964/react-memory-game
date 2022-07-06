@@ -2,11 +2,16 @@ import { useState } from 'react'
 import './Modal.css'
 
 // Match end modal
-const Modal = ({ showModal, handleClose, turns, seconds }) => {
+const Modal = ({ showModal, handleClose, turns, seconds, playAgain }) => {
 	// const [showModal, setShowModal] = useState(false);
 
 	const calculatePoints = () => {
 		return Math.floor((1 / (turns * seconds)) * 100000)
+	}
+
+	const handlePlayAgain = () => {
+		handleClose()
+		playAgain()
 	}
 
 	return (
@@ -24,6 +29,12 @@ const Modal = ({ showModal, handleClose, turns, seconds }) => {
 					You have finished in {seconds} seconds with {turns} turns
 				</p>
 				<p>Points : {calculatePoints()}</p>
+				<div className='center'>
+					<button onClick={handlePlayAgain}>
+						{' '}
+						<i className='fa-solid fa-arrow-rotate-right'></i> Play again
+					</button>
+				</div>
 			</div>
 		</div>
 	)
