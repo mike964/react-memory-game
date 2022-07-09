@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import Board from './components/Board'
 import Modal from './components/Modal'
-import SingleCard from './components/SingleCard'
 
 const cardImages = [
 	{ src: '/img/helmet-1.png', matched: false },
