@@ -7,10 +7,10 @@ body {
 	text-align: center;
 	background: #843999;
 	color: #fff;
-	height: 100vh;
+	/* height: 100vh; */
 }
 .App {
-	height: 100vh;
+	min-height: 100vh;
 	background: rgb(84, 172, 255);
 	background-image: linear-gradient(
 		90deg,
@@ -22,8 +22,9 @@ body {
 
 /* base styles */
 .container {
-	max-width: 860px;
-	margin: 40px auto;
+	max-width: 720px;
+	/* margin: 40px auto; */
+	padding: 2rem;
 }
 button {
 	background: #9b56ae;
@@ -41,7 +42,7 @@ button:hover {
 	color: #fff;
 }
 .card-grid {
-	margin-top: 40px;
+	/* margin-top: 40px; */
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 20px;

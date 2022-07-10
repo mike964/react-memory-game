@@ -58,6 +58,7 @@ function App() {
 	]
 
 	const [showMainActivity, setShowMainActivity] = useState(true)
+	const [category, setCategory] = useState('') // flags, teams , fruits
 
 	const [cards, setCards] = useState([])
 	console.log(cards.length)
@@ -80,7 +81,7 @@ function App() {
 		// 	.map(card => ({ ...card, id: Math.random() }))
 
 		const getSelectedCards = () => {
-			switch (selectedCategory) {
+			switch (category) {
 				case 'flags':
 					return [...flags]
 				case 'fruits':
@@ -216,7 +217,10 @@ function App() {
 			</header>
 
 			{showMainActivity ? (
-				<MainActivity setShowMainActivity={setShowMainActivity} />
+				<MainActivity
+					setShowMainActivity={setShowMainActivity}
+					setCategory={setCategory}
+				/>
 			) : (
 				<div className='container'>
 					{showModal && (

@@ -1,9 +1,13 @@
 import React from 'react'
 
-const MainActivity = ({ setShowMainActivity }) => {
+const MainActivity = ({ setShowMainActivity, setCategory }) => {
 	const handleStart = () => {
 		// Show Game activity
 		setShowMainActivity(false)
+	}
+
+	const handleChange = e => {
+		setCategory(e.target.value)
 	}
 
 	return (
@@ -19,38 +23,44 @@ const MainActivity = ({ setShowMainActivity }) => {
 								<div className='form-check'>
 									<input
 										id='credit'
-										name='paymentMethod'
+										name='category'
 										type='radio'
 										className='form-check-input'
+										value='teams'
+										onChange={handleChange}
 										defaultChecked
 										required
 									/>
 									<label className='form-check-label' htmlFor='credit'>
-										Credit card
+										Football Teams
 									</label>
 								</div>
 								<div className='form-check'>
 									<input
 										id='debit'
-										name='paymentMethod'
+										name='category'
+										value='fruits'
 										type='radio'
+										onChange={handleChange}
 										className='form-check-input'
 										required
 									/>
 									<label className='form-check-label' htmlFor='debit'>
-										Debit card
+										Fruits
 									</label>
 								</div>
 								<div className='form-check mb-3'>
 									<input
 										id='paypal'
-										name='paymentMethod'
+										name='category'
+										value='flags'
 										type='radio'
+										onChange={handleChange}
 										className='form-check-input'
 										required
 									/>
 									<label className='form-check-label' htmlFor='paypal'>
-										PayPal
+										Flags
 									</label>
 								</div>
 								<div className='form-check form-switch'>
