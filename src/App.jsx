@@ -1,64 +1,28 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
+import { flags, fruits, teams } from './card-sets'
 import Board from './components/Board'
 import MainActivity from './components/MainActivity'
 import Modal from './components/Modal'
-
-const footballTeams = [
-	{ src: '/img/helmet-1.png', matched: false },
-	{ src: '/img/potion-1.png', matched: false },
-	{ src: '/img/ring-1.png', matched: false },
-	{ src: '/img/scroll-1.png', matched: false },
-	{ src: '/img/shield-1.png', matched: false },
-	{ src: '/img/sword-1.png', matched: false },
-]
-
-const fruits = ['apple']
-
-const flags = [
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Emirates.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Germany.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Sweden.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Finland.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Spain.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/France.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Italy.png' },
-	{
-		src: process.env.PUBLIC_URL + '/assets/flags/Netherlands.png',
-	},
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Austria.png' },
-	{
-		src: process.env.PUBLIC_URL + '/assets/flags/SouthKorea.png',
-	},
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Denmark.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Belgium.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Portugal.png' },
-	{
-		src: process.env.PUBLIC_URL + '/assets/flags/Switzerland.png',
-	},
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Poland.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Japan.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/America.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Norway.png' },
-	{ src: process.env.PUBLIC_URL + '/assets/flags/Malta.png' },
-]
 
 function App() {
 	console.log('App.jsx mounted.')
 	const timerId = useRef()
 	// const seconds = useRef(0)  // Not work!
 
-	const cardImages = [
-		{ src: '/img/helmet-1.png', matched: false },
-		{ src: '/img/potion-1.png', matched: false },
-		{ src: '/img/ring-1.png', matched: false },
-		{ src: '/img/scroll-1.png', matched: false },
-		{ src: '/img/shield-1.png', matched: false },
-		{ src: '/img/sword-1.png', matched: false },
-	]
+	// const cardImages = [
+	// 	{ src: '/img/helmet-1.png', matched: false },
+	// 	{ src: '/img/potion-1.png', matched: false },
+	// 	{ src: '/img/ring-1.png', matched: false },
+	// 	{ src: '/img/scroll-1.png', matched: false },
+	// 	{ src: '/img/shield-1.png', matched: false },
+	// 	{ src: '/img/sword-1.png', matched: false },
+	// ]
 
+	// * Settings
 	const [showMainActivity, setShowMainActivity] = useState(true)
 	const [category, setCategory] = useState('') // flags, teams , fruits
+	const [showTimer, setShowTimer] = useState(true)
 
 	const [cards, setCards] = useState([])
 	console.log(cards.length)
@@ -76,27 +40,31 @@ function App() {
 
 	// shuffle cards for new game
 	const shuffleCards = () => {
+		console.log('suffleCards()..')
 		// const shuffledCards = [...cardImages, ...cardImages]
 		// 	.sort(() => Math.random() - 0.5)
 		// 	.map(card => ({ ...card, id: Math.random() }))
 
-		const getSelectedCards = () => {
+		const getSelectedCards = category => {
 			switch (category) {
 				case 'flags':
-					return [...flags]
+					return flags
 				case 'fruits':
-					return [...fruits]
+					return fruits
 				case 'teams':
-					return [...footballTeams]
-
+					return teams
 				default:
 					return []
 			}
 		}
 
-		const selectedCards = getSelectedCards()
+		// const selectedCards = getSelectedCards(category)
+		const selectedCards = [...flags]
+		console.log(selectedCards)
 
-		const shuffledCards = [...flags].sort(() => Math.random() - 0.5).slice(0, 8)
+		const shuffledCards = [...selectedCards]
+			.sort(() => Math.random() - 0.5)
+			.slice(0, 8)
 
 		const pickedCards = [...shuffledCards, ...shuffledCards].map(card => ({
 			...card,
@@ -161,9 +129,9 @@ function App() {
 	}
 
 	// start new game automatically when app mounts
-	useEffect(() => {
-		shuffleCards()
-	}, [])
+	// useEffect(() => {
+	// 	shuffleCards()
+	// }, [])
 
 	const startNewGame = () => {
 		shuffleCards()
@@ -190,36 +158,43 @@ function App() {
 
 	return (
 		<div className='App'>
-			<header className='nav d-flex '>
-				<div className='py-2 px-5'>
+			<header className='nav d-flex  justify-content-around fs-4'>
+				<div className='pt-2 px-5'>
 					<h3>
 						{' '}
 						<i className='fa-solid fa-chess-board'></i> Magic Match
 					</h3>
 				</div>
 
-				<div className='timer p-2 d-flex flex-fill justify-content-around'>
-					{!showMainActivity && (
-						<>
-							<div className='x'>Turns: {turns}</div>
-							<div>
-								<i className='fa-regular fa-clock'></i> Timer:{' '}
-								{seconds === 0 ? '0:00' : seconds}
-							</div>
+				{!showMainActivity && (
+					<>
+						<div className='pt-2 flex-fill'>
+							<span className='x'> Turns: {turns}</span>{' '}
+							{showTimer && (
+								<>
+									<span className='mx-2'>|</span>
+									<span>
+										<i className='fa-regular fa-clock'></i> Timer:{' '}
+										{seconds === 0 ? '0:00' : seconds}
+									</span>
+								</>
+							)}
+						</div>
 
-							<div className='btns '>
-								<button onClick={startNewGame}>New Game</button>{' '}
-								{/* <button onClick={() => setShowModal(!showModal)}>Show Modal</button>{' '} */}
-							</div>
-						</>
-					)}
-				</div>
+						<div className='p-2 btns'>
+							<button onClick={startNewGame}>New Game</button>{' '}
+							{/* <button onClick={() => setShowModal(!showModal)}>Show Modal</button>{' '} */}
+						</div>
+					</>
+				)}
 			</header>
 
 			{showMainActivity ? (
 				<MainActivity
 					setShowMainActivity={setShowMainActivity}
 					setCategory={setCategory}
+					startNewGame={startNewGame}
+					setShowTimer={setShowTimer}
 				/>
 			) : (
 				<div className='container'>

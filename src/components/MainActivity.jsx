@@ -1,13 +1,23 @@
 import React from 'react'
 
-const MainActivity = ({ setShowMainActivity, setCategory }) => {
+const MainActivity = ({
+	setShowMainActivity,
+	setCategory,
+	startNewGame,
+	setShowTimer,
+}) => {
 	const handleStart = () => {
 		// Show Game activity
 		setShowMainActivity(false)
+		startNewGame()
 	}
 
 	const handleChange = e => {
 		setCategory(e.target.value)
+	}
+
+	const handleShowTimerToggle = e => {
+		setShowTimer(e.target.checked)
 	}
 
 	return (
@@ -73,6 +83,7 @@ const MainActivity = ({ setShowMainActivity, setCategory }) => {
 										className='form-check-input'
 										type='checkbox'
 										id='flexSwitchCheckChecked'
+										onChange={handleShowTimerToggle}
 										defaultChecked
 									/>
 								</div>
