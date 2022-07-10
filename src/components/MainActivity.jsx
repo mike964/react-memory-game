@@ -8,8 +8,8 @@ const MainActivity = ({
 }) => {
 	const handleStart = () => {
 		// Show Game activity
-		setShowMainActivity(false)
 		startNewGame()
+		setShowMainActivity(false)
 	}
 
 	const handleChange = e => {

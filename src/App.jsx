@@ -134,6 +134,9 @@ function App() {
 	// }, [])
 
 	const startNewGame = () => {
+		// clear timer
+		clearInterval(timerId.current)
+
 		shuffleCards()
 		// Reset State
 		setMatchedCardsCount(0)
@@ -182,7 +185,9 @@ function App() {
 						</div>
 
 						<div className='p-2 btns'>
-							<button onClick={startNewGame}>New Game</button>{' '}
+							<button onClick={() => setShowMainActivity(true)}>
+								New Game
+							</button>{' '}
 							{/* <button onClick={() => setShowModal(!showModal)}>Show Modal</button>{' '} */}
 						</div>
 					</>
