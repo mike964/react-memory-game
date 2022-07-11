@@ -22,12 +22,15 @@ body {
 
 /* base styles */
 .board-container {
-	max-width: 700px;
+	max-width: 640px;
 	margin: auto;
-	padding: 2rem;
+	margin-top: 2rem;
+	padding: 0.8rem;
+	background-color: rgba(87, 48, 149, 0.673);
+	border-radius: 8px;
 }
 button {
-	background: #9b56ae;
+	background: rgba(81, 28, 117, 0.659);
 	/* border: 1px solid #843999; */
 	border: none;
 	/* padding: 6px 12px; */
@@ -45,11 +48,11 @@ button:hover {
 	/* margin-top: 40px; */
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-gap: 20px;
+	grid-gap: 0.8rem;
 }
 
 header {
-	background: #9610b485;
+	background: #5a10b485;
 	/* justify-content: space-around; */
 	/* padding: 1rem; */
 	/* padding: 12px; */

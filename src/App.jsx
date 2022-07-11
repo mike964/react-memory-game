@@ -37,7 +37,6 @@ function App() {
 	const [matchedCardsCount, setMatchedCardsCount] = useState(0)
 	// Timer : calculate time passed for match
 	const [seconds, setSeconds] = useState(0)
-	const [firstClick, setFirstClick] = useState(true)
 	const [showSpinners, setShowSpinners] = useState(false)
 
 	// shuffle cards for new game
@@ -85,10 +84,8 @@ function App() {
 	// handle when single card get clicked
 	const handleChoice = card => {
 		// If first time user click card, start timer
-		if (firstClick) startTimer()
-		setFirstClick(false)
+		if (!seconds) startTimer()
 		console.log(card)
-
 		choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
 	}
 
@@ -139,12 +136,12 @@ function App() {
 
 	const startNewGame = () => {
 		// clear timer
-		// clearInterval(timerId.current)
+		clearInterval(timerId.current)
 
 		setShowSpinners(true)
 		setTimeout(() => {
 			setShowSpinners(false)
-		}, 2000)
+		}, 1000)
 
 		shuffleCards()
 		// Reset State
@@ -152,10 +149,11 @@ function App() {
 		// Reset timer - clear old timer interval
 		setSeconds(0)
 		setShowModal(false)
-		// startTimer()
+		// startTimer()   // timer starts when user click a card
 	}
 
 	const startTimer = () => {
+		clearInterval(timerId.current)
 		timerId.current = setInterval(() => {
 			// renders.current++
 			setSeconds(prev => prev + 1)
