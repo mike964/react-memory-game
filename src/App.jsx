@@ -22,7 +22,7 @@ function App() {
 
 	// * Settings
 	const [showMainActivity, setShowMainActivity] = useState(true)
-	const [category, setCategory] = useState('') // flags, teams , fruits
+	const [category, setCategory] = useState('teams') // flags, teams , fruits
 	const [showTimer, setShowTimer] = useState(true)
 
 	const [cards, setCards] = useState([])
@@ -59,8 +59,8 @@ function App() {
 			}
 		}
 
-		// const selectedCards = getSelectedCards(category)
-		const selectedCards = [...flags]
+		const selectedCards = getSelectedCards(category)
+		// const selectedCards = [...flags]
 		console.log(selectedCards)
 
 		const shuffledCards = [...selectedCards]

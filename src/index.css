@@ -63,6 +63,6 @@ header {
 	padding-top: 4px;
 }
 
-.btns {
-	/* padding: 8px; */
+.card {
+	overflow: hidden;
 }

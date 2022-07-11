@@ -13,3 +13,4 @@ calculate points                                ✅ 4-19
 save user points to localstorage with custom hook 
 Make cool design navbar
 Fix timer when unmounts
+Add sound Effects

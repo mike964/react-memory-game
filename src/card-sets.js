@@ -32,6 +32,8 @@ export const flags = [
 	{ src: process.env.PUBLIC_URL + '/assets/flags/India.png' },
 	{ src: process.env.PUBLIC_URL + '/assets/flags/Tunisia.png' },
 	{ src: process.env.PUBLIC_URL + '/assets/flags/Argentina.png' },
+	{ src: process.env.PUBLIC_URL + '/assets/flags/Algeria.png' },
+	{ src: process.env.PUBLIC_URL + '/assets/flags/Egypt.png' },
 ]
 
 export const fruits = [
@@ -51,7 +53,7 @@ export const fruits = [
 		src: process.env.PUBLIC_URL + '/assets/fruit/watermelon.png',
 	},
 	{
-		src: process.env.PUBLIC_URL + '/asssets/fruit/pomegranate.png',
+		src: process.env.PUBLIC_URL + '/assets/fruit/pomegranate.png',
 	},
 	{
 		src: process.env.PUBLIC_URL + '/assets/fruit/strawberry.png',
@@ -64,4 +66,47 @@ export const fruits = [
 	},
 ]
 
-export const teams = ['Arsenal', 'Chelsea']
+export const teams = [
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/arsenal.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/atmadrid.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/barcelona.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/rmadrid.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/chelsea.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/juventus.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/leicester.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/liverpool.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/mancity.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/manunited.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/milan.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/napoli.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/roma.png',
+	},
+	{
+		src: process.env.PUBLIC_URL + '/assets/teams/tottenham.png',
+	},
+]
