@@ -22,7 +22,7 @@ const MainActivity = ({
 
 	return (
 		<div>
-			<div className='container'>
+			<div className='container p-5'>
 				<div className='card main-activity'>
 					<div className='card-body'>
 						<h4 className='card-title'>Settings</h4>

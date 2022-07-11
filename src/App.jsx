@@ -4,6 +4,7 @@ import { flags, fruits, teams } from './card-sets'
 import Board from './components/Board'
 import MainActivity from './components/MainActivity'
 import Modal from './components/Modal'
+import Spinners from './components/Spinners'
 
 function App() {
 	console.log('App.jsx mounted.')
@@ -37,6 +38,7 @@ function App() {
 	// Timer : calculate time passed for match
 	const [seconds, setSeconds] = useState(0)
 	const [firstClick, setFirstClick] = useState(true)
+	const [showSpinners, setShowSpinners] = useState(false)
 
 	// shuffle cards for new game
 	const shuffleCards = () => {
@@ -66,11 +68,13 @@ function App() {
 			.sort(() => Math.random() - 0.5)
 			.slice(0, 8)
 
-		const pickedCards = [...shuffledCards, ...shuffledCards].map(card => ({
-			...card,
-			id: Math.random(),
-			matched: false,
-		}))
+		const pickedCards = [...shuffledCards, ...shuffledCards]
+			.map(card => ({
+				...card,
+				id: Math.random(),
+				matched: false,
+			}))
+			.sort(() => Math.random() - 0.5)
 
 		setChoiceOne(null)
 		setChoiceTwo(null)
@@ -135,7 +139,12 @@ function App() {
 
 	const startNewGame = () => {
 		// clear timer
-		clearInterval(timerId.current)
+		// clearInterval(timerId.current)
+
+		setShowSpinners(true)
+		setTimeout(() => {
+			setShowSpinners(false)
+		}, 2000)
 
 		shuffleCards()
 		// Reset State
@@ -143,7 +152,7 @@ function App() {
 		// Reset timer - clear old timer interval
 		setSeconds(0)
 		setShowModal(false)
-		startTimer()
+		// startTimer()
 	}
 
 	const startTimer = () => {
@@ -159,39 +168,64 @@ function App() {
 		timerId.current = 0
 	}
 
+	// useEffect(() => {
+	// 	return () => {
+	// 		// cleanup
+	// 		clearInterval(timerId.current)
+	// 		timerId.current = 0
+	// 	}
+	// }, [])
+
 	return (
 		<div className='App'>
-			<header className='nav d-flex  justify-content-around fs-4'>
-				<div className='pt-2 px-5'>
-					<h3>
-						{' '}
-						<i className='fa-solid fa-chess-board'></i> Magic Match
-					</h3>
+			<header className='fs-4'>
+				<div className='container'>
+					<div className='row'>
+						<div className='col p-2'>
+							<h3>
+								{' '}
+								<i className='fa-solid fa-chess-board'></i> Magic Match
+							</h3>
+						</div>
+
+						{showSpinners && (
+							<>
+								<div className='col'>
+									<Spinners />
+								</div>
+								<div className='col'></div>
+							</>
+						)}
+
+						{!showMainActivity && !showSpinners && (
+							<>
+								<div className='col pt-2'>
+									<div
+										className='mx-auto text-start'
+										style={{ width: '300px' }}>
+										<span className='px-3'> Turns: {turns}</span>{' '}
+										{showTimer && (
+											<span>
+												<i className='fa-regular fa-clock'></i> Timer:{' '}
+												{seconds === 0 ? '0:00' : seconds}
+											</span>
+										)}
+									</div>
+								</div>
+
+								<div className='col p-2 btns'>
+									<button onClick={() => setShowMainActivity(true)}>
+										New Game
+									</button>{' '}
+									{/* btn below for developer only */}
+									<button onClick={() => setShowModal(!showModal)}>
+										Show Modal
+									</button>{' '}
+								</div>
+							</>
+						)}
+					</div>
 				</div>
-
-				{!showMainActivity && (
-					<>
-						<div className='pt-2 flex-fill'>
-							<span className='x'> Turns: {turns}</span>{' '}
-							{showTimer && (
-								<>
-									<span className='mx-2'>|</span>
-									<span>
-										<i className='fa-regular fa-clock'></i> Timer:{' '}
-										{seconds === 0 ? '0:00' : seconds}
-									</span>
-								</>
-							)}
-						</div>
-
-						<div className='p-2 btns'>
-							<button onClick={() => setShowMainActivity(true)}>
-								New Game
-							</button>{' '}
-							{/* <button onClick={() => setShowModal(!showModal)}>Show Modal</button>{' '} */}
-						</div>
-					</>
-				)}
 			</header>
 
 			{showMainActivity ? (
@@ -202,7 +236,7 @@ function App() {
 					setShowTimer={setShowTimer}
 				/>
 			) : (
-				<div className='container'>
+				<div className='board-container'>
 					{showModal && (
 						<Modal
 							showModal={showModal}

@@ -1,0 +1,15 @@
+
+2022-4-18 
+
+
+
+# TODO 
+------------------
+Add Popup Modal when match finish               ✅ 22-4-18  
+Timer  done    4-19                             ✅
+Show new game in modal 
+reset when new game
+calculate points                                ✅ 4-19
+save user points to localstorage with custom hook 
+Make cool design navbar
+Fix timer when unmounts
