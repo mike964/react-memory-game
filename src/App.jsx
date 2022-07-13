@@ -216,9 +216,9 @@ function App() {
 										New Game
 									</button>{' '}
 									{/* btn below for developer only */}
-									<button onClick={() => setShowModal(!showModal)}>
+									{/* <button onClick={() => setShowModal(!showModal)}>
 										Show Modal
-									</button>{' '}
+									</button>  */}
 								</div>
 							</>
 						)}

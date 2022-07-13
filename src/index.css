@@ -27,7 +27,7 @@ body {
 	margin-top: 2rem;
 	padding: 0.8rem;
 	background-color: rgba(87, 48, 149, 0.673);
-	border-radius: 8px;
+	border-radius: 10px;
 }
 button {
 	background: rgba(81, 28, 117, 0.659);
